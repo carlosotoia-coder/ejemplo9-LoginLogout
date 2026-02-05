@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | CodeAcademy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 flex min-h-screen font-sans">
+
+  <aside class="w-64 bg-white border-r border-gray-200 p-6 hidden md:flex flex-col">
+    <div class="mb-10">
+        <h2 class="text-2xl font-extrabold text-indigo-600 tracking-tighter">CODE<span class="text-gray-800">ACADEMY</span></h2>
+    </div>
+    
+    <nav class="space-y-2 flex-grow">
+      <a href="#" class="flex items-center space-x-3 bg-indigo-50 text-indigo-700 p-3 rounded-xl font-semibold">
+        <span>📚</span>
+        <span>Mis Cursos</span>
+      </a>
+      <a href="{% url 'dashboard_mixin' %}" class="flex items-center space-x-3 text-gray-600 hover:bg-gray-100 p-3 rounded-xl transition">
+        <span>📊</span>
+        <span>Estadísticas</span>
+      </a>
+      <a href="{% url 'permiso_mixin' %}" class="flex items-center space-x-3 text-gray-600 hover:bg-gray-100 p-3 rounded-xl transition">
+        <span>🔑</span>
+        <span>Permisos Especiales</span>
+      </a>
+    </nav>
+
+    <div class="border-t border-gray-100 pt-6">
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="flex items-center space-x-3 text-red-500 hover:bg-red-50 w-full p-3 rounded-xl transition font-medium">
+              <span>🚪</span>
+              <span>Cerrar Sesión</span>
+            </button>
+        </form>
+    </div>
+  </aside>
+
+  <main class="flex-1 p-6 md:p-10">
+    <header class="flex justify-between items-center mb-10">
+      <div>
+          <h1 class="text-3xl font-bold text-gray-800">Panel de Control</h1>
+          <p class="text-gray-500 text-sm">Hola, <span class="font-bold text-indigo-600">{{ request.user.username }}</span>.
